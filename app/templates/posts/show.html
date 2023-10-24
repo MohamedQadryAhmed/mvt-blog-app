@@ -1,0 +1,26 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<div class="row row-cols-md-6 g-4 mt-2 ms-2">
+    {% for post in posts %}
+    <div class="card m-4" style="width: 20rem;">
+        <img src="{{post.get_image_url}}" class="card-img-top mt-2" height="150px">
+        <div class="card-body">
+            <h3>{{post.title}}</h3>
+            <h6 class="text-muted">{{post.craeted_at.strftime('%y-%m-%d %H:%M')}}</time></h6> 
+            <div class="row">
+                <a class="col-3 m-2 btn btn-outline-secondary" href="{{url_for('post.show', id=post.id)}}">Show</a>
+                <a class="col-3 m-2 btn btn-outline-secondary" href="{{url_for('post.edit', id=post.id)}}">Edit</a>
+                <a class="col-3 m-2 btn btn-outline-secondary" href="{{url_for('post.delete' , id=post.id)}}">Delete</a>
+            </div>
+        </div>
+    </div>
+    
+    {% endfor %}
+    
+</div>
+<a class="btn btn-secondary mb-5 m-3" href="{{url_for('post.create')}}">Add New Post</a>
+
+{% endblock %}
